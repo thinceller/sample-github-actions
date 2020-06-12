@@ -1,0 +1,19 @@
+name: test
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: hoge
+      env:
+        REPO: ${{ github.repository }}
+        EVENT: ${{ toJson(github.event) }}
+      run: |
+        echo $REPO
+        echo $EVENT
