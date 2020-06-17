@@ -16,4 +16,4 @@ jobs:
         EVENT: ${{ toJson(github.event) }}
       run: |
         echo $REPO
-        echo $EVENT
+        echo $EVENT | jq
