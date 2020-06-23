@@ -17,7 +17,11 @@ jobs:
       run: |
         echo $REPO
         echo $EVENT | jq .
-    - name: check env
+    - name: ここでbranch名とrevision情報の取得
+      env:
+        PR_URL: ${{ github.event.issue.pull_request.url }}
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo $GITHUB_SHA
-        echo $GITHUB_REF
+        curl -x GET --url $PR_URL \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN  }}' \
+          --header 'content-type: application/json'
