@@ -26,4 +26,4 @@ jobs:
         curl --request GET \
           --url "$PR_URL" \
           --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN  }}' \
-          --header 'content-type: application/json'
+          --header 'content-type: application/json' | jq '[.head.ref, .head.sha]'
