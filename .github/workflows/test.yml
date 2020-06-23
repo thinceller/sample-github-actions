@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-ruby@1
+      with:
+        ruby-version: '2.7'
     - name: hoge
       env:
         REPO: ${{ github.repository }}
@@ -23,7 +26,4 @@ jobs:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo $PR_URL
-        curl --request GET \
-          --url "$PR_URL" \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN  }}' \
-          --header 'content-type: application/json' | jq '[.head.ref, .head.sha]'
+        ruby ./pr-getter.rb
