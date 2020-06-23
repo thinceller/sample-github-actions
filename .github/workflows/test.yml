@@ -26,4 +26,4 @@ jobs:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo $PR_URL
-        ruby ./pr-getter.rb
+        ruby $GITHUB_WORKSPACE/.github/workflows/pr-getter.rb
