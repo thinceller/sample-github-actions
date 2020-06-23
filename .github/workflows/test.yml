@@ -17,3 +17,7 @@ jobs:
       run: |
         echo $REPO
         echo $EVENT | jq .
+    - name: check env
+      run: |
+        echo $GITHUB_SHA
+        echo $GITHUB_REF
