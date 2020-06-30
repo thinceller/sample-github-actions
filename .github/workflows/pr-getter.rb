@@ -32,8 +32,8 @@ def fetch(url, option)
 end
 
 def set_env(ref:, sha:)
-  system! "echo ::set-env name=branch_name::#{ref}"
-  system! "echo ::set-env name=sha::#{sha}"
+  system "echo ::set-env name=branch_name::#{ref}"
+  system "echo ::set-env name=sha::#{sha}"
 end
 
 main
