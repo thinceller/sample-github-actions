@@ -9,7 +9,9 @@ def main
   url = ENV.fetch('PR_URL')
 
   res = fetch(url, { token: github_token })
-  puts res['head']
+  head = res['head']
+
+  set_env(ref: head['ref'], sha: head['sha'])
 end
 
 def fetch(url, option)
@@ -27,6 +29,11 @@ def fetch(url, option)
   end
 
   JSON.parse(res.body)
+end
+
+def set_env(ref:, sha:)
+  system! "echo ::set-env name=branch_name::#{ref}"
+  system! "echo ::set-env name=sha::#{sha}"
 end
 
 main

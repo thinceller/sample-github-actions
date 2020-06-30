@@ -25,5 +25,9 @@ jobs:
         PR_URL: ${{ github.event.issue.pull_request.url }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo $PR_URL
         ruby $GITHUB_WORKSPACE/.github/workflows/pr-getter.rb
+        echo "Set branch name and branch head sha to env"
+    - name: check
+      run: |
+        echo $branch_name
+        echo $sha
