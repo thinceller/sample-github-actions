@@ -17,25 +17,25 @@ jobs:
         ruby-version: '2.7'
     - name: hoge
       env:
-        GENV: ${{ toJson(env) }}
         REPO: ${{ github.repository }}
       run: |
         echo $REPO
-        echo $GENV
     - name: ここでbranch名とrevision情報の取得
       env:
         PR_URL: ${{ github.event.issue.pull_request.url }}
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        ruby $GITHUB_WORKSPACE/.github/workflows/pr-getter.rb
+        ruby $GITHUB_WORKSPACE/main/.github/workflows/pr-getter.rb
         echo "Set branch name and branch head sha to env"
     - name: check
+      id: check
       run: |
         echo $branch_name
         echo $sha
+        echo ::set-output name=repo::dotfiles
     - uses: actions/checkout@v2
       with:
-        repository: thinceller/dotfiles
+        repository: thinceller/${{ steps.check.outputs.repo }}
         path: dotfiles
     - name: hoge
       env:
