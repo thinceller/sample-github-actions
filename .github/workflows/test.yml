@@ -10,16 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        path: main
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: '2.7'
     - name: hoge
       env:
+        GENV: ${{ toJson(env) }}
         REPO: ${{ github.repository }}
-        EVENT: ${{ toJson(github.event) }}
       run: |
         echo $REPO
-        echo $EVENT | jq .
+        echo $GENV
     - name: ここでbranch名とrevision情報の取得
       env:
         PR_URL: ${{ github.event.issue.pull_request.url }}
@@ -31,3 +33,14 @@ jobs:
       run: |
         echo $branch_name
         echo $sha
+    - uses: actions/checkout@v2
+      with:
+        repository: thinceller/dotfiles
+        path: dotfiles
+    - name: hoge
+      env:
+        GENV: ${{ toJson(env) }}
+        REPO: ${{ github.repository }}
+      run: |
+        echo $REPO
+        echo $GENV
