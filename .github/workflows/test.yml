@@ -9,6 +9,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+      with:
+        path: main
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: '2.7'
@@ -17,6 +20,7 @@ jobs:
         REPO: ${{ github.repository }}
       run: |
         pwd
+        ls
         echo $HOME
         echo $GITHUB_WORKSPACE
         echo $REPO
@@ -43,6 +47,7 @@ jobs:
         REPO: ${{ github.repository }}
       run: |
         pwd
+        ls
         echo $HOME
         echo $GITHUB_WORKSPACE
         echo $REPO
