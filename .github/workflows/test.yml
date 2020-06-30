@@ -9,9 +9,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        path: main
     - uses: actions/setup-ruby@v1
       with:
         ruby-version: '2.7'
@@ -19,6 +16,9 @@ jobs:
       env:
         REPO: ${{ github.repository }}
       run: |
+        pwd
+        echo $HOME
+        echo $GITHUB_WORKSPACE
         echo $REPO
     - name: ここでbranch名とrevision情報の取得
       env:
@@ -43,5 +43,7 @@ jobs:
         REPO: ${{ github.repository }}
       run: |
         pwd
+        echo $HOME
+        echo $GITHUB_WORKSPACE
         echo $REPO
         echo $GENV
