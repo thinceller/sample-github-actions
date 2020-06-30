@@ -42,5 +42,6 @@ jobs:
         GENV: ${{ toJson(env) }}
         REPO: ${{ github.repository }}
       run: |
+        pwd
         echo $REPO
         echo $GENV
